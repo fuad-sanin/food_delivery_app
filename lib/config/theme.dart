@@ -44,6 +44,8 @@ class AppColors {
   static const greyColor = Color(0xFFB4B8CA);
   static const greyColor1 = Color(0xFF515151);
   static const shadow = Color(0xFF000000);
+  static const shadowTxt = Color(0xFFfafafa);
+  static const txt = Color(0xFFD1D1D1);
 }
 
 class AppTextStyle {
@@ -53,7 +55,23 @@ class AppTextStyle {
         fontWeight: FontWeight.normal,
         fontSize: 14,
         fontFamily: 'Roboto',
-        color: color ?? AppColors.greyColor);
+        color: color ?? AppColors.greyColor1);
+  }
+
+  static TextStyle regular10({Color? color}) {
+    return TextStyle(
+        fontWeight: FontWeight.normal,
+        fontSize: 10,
+        fontFamily: 'Roboto',
+        color: color ?? AppColors.greyColor1);
+  }
+
+  static TextStyle light20({Color? color}) {
+    return TextStyle(
+        fontWeight: FontWeight.w100,
+        fontSize: 20,
+        fontFamily: 'Roboto',
+        color: color ?? Colors.black);
   }
 
   static TextStyle regular16({Color? color}) {
@@ -89,6 +107,15 @@ class AppTextStyle {
         letterSpacing: 2.0,
         fontFamily: 'Roboto',
         color: color ?? const Color(0xFFFF0000));
+  }
+
+  static TextStyle boldSpaceBlack({Color? color}) {
+    return TextStyle(
+        fontWeight: FontWeight.bold,
+        fontSize: 26,
+        // letterSpacing: 2.0,
+        fontFamily: 'Roboto',
+        color: color ?? const Color(0xFF000000));
   }
 
   static TextStyle whiteBold({Color? color}) {
