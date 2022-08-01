@@ -1,8 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:food_delivery_app/screens/signup/signup_screen.dart';
 import '../../config/constants.dart';
 import '../../config/theme.dart';
 import '../../utils/helper.dart';
+import '../../utils/utils.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -46,7 +48,7 @@ class _LoginScreenState extends State<LoginScreen> {
             child: Column(
               children: [
                 Text(
-                  'log In',
+                  'Log In',
                   style: AppTextStyle.light20(),
                   textAlign: TextAlign.center,
                 ),
@@ -63,10 +65,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(9),
                         ),
-                        label: const Text(
-                          'Email',
-                          style: TextStyle(color: AppColors.txt),
-                        ),
+                        labelText: 'Email',
+                        labelStyle: const TextStyle(color: AppColors.txt),
                       ),
                     ),
                   ),
@@ -84,10 +84,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(9),
                         ),
-                        label: const Text(
-                          'Password',
-                          style: TextStyle(color: AppColors.txt),
-                        ),
+                        labelText: 'Password',
+                        labelStyle: const TextStyle(color: AppColors.txt),
                       ),
                     ),
                   ),
@@ -95,9 +93,18 @@ class _LoginScreenState extends State<LoginScreen> {
                 SizedBox(
                   width: 320,
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      TextButton(onPressed: () {}, child: const Text('Sign up'))
+                      const Text('Don\'t have an account?'),
+                      TextButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const SignUpScreen()),
+                          );
+                        },
+                        child: const Text('Sign up'),
+                      )
                     ],
                   ),
                 ),
@@ -123,7 +130,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           isLoading = true;
                         });
                         signIn();
-                        Future.delayed(const Duration(seconds: 3), () {
+                        Future.delayed(const Duration(seconds: 1), () {
                           setState(() {
                             if (emailController.text != " " ||
                                 passwordController.text != " ") {
@@ -194,7 +201,7 @@ class _LoginScreenState extends State<LoginScreen> {
           Column(
             children: [
               const SizedBox(
-                height: 25,
+                height: 15,
               ),
               Stack(children: [
                 const Align(
@@ -245,8 +252,8 @@ class _LoginScreenState extends State<LoginScreen> {
         email: emailController.text.trim(),
         password: passwordController.text.trim(),
       );
-    } catch (e) {
-      print('Email or Password Incorrect');
+    } on FirebaseAuthException catch (e) {
+      showSnackBar(context, e.message!);
     }
   }
 }

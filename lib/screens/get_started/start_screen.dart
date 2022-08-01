@@ -7,6 +7,7 @@ import 'package:food_delivery_app/screens/login/login_screen.dart';
 import '../../config/constants.dart';
 import '../../config/theme.dart';
 import '../../utils/helper.dart';
+import '../signup/signup_screen.dart';
 
 class StartScreen extends StatelessWidget {
   const StartScreen({Key? key}) : super(key: key);
